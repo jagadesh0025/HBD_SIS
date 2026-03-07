@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday Sister</title>
+
+<style>
+
+/* Animated gradient background */
+
+body{
+margin:0;
+font-family:Arial;
+text-align:center;
+color:#5d4037;
+
+background:linear-gradient(270deg,#fff9c4,#fff176,#ffd54f,#ffca28);
+background-size:800% 800%;
+animation:gradientMove 10s ease infinite;
+}
+
+@keyframes gradientMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.container{
+max-width:400px;
+margin:auto;
+padding:25px;
+}
+
+/* Heading */
+
+h1{
+color:#ff6f00;
+font-size:32px;
+}
+
+/* Message */
+
+.message{
+font-size:18px;
+margin-top:20px;
+line-height:1.6;
+}
+
+/* Button */
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:25px;
+background:#ff9800;
+color:white;
+font-size:16px;
+margin-top:25px;
+cursor:pointer;
+}
+
+/* Slideshow */
+
+.slideshow{
+margin-top:20px;
+max-width:250px;
+margin-left:auto;
+margin-right:auto;
+overflow:hidden;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+.slide{
+display:none;
+}
+
+.slide img{
+width:100%;
+}
+
+/* Fade */
+
+.fade{
+animation:fade 1.5s;
+}
+
+@keyframes fade{
+from{opacity:0.4}
+to{opacity:1}
+}
+
+/* Cake */
+
+.cake{
+font-size:70px;
+animation:bounce 1s infinite alternate;
+}
+
+@keyframes bounce{
+from{transform:translateY(0);}
+to{transform:translateY(-10px);}
+}
+
+/* Balloons */
+
+.balloon{
+position:fixed;
+bottom:-150px;
+width:40px;
+height:60px;
+border-radius:50%;
+animation:float 10s infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+100%{transform:translateY(-120vh);}
+}
+
+button{
+padding:14px 30px;
+border:none;
+border-radius:40px;
+font-size:16px;
+font-weight:bold;
+color:white;
+cursor:pointer;
+margin-top:25px;
+
+background:linear-gradient(45deg,#ff4081,#ff9800);
+
+box-shadow:
+0 0 10px #ff9800,
+0 0 20px #ff9800,
+0 0 30px #ff5722;
+
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+box-shadow:
+0 0 15px #ff9800,
+0 0 30px #ff9800,
+0 0 40px #ff5722;
+}
+/* Confetti */
+
+.confetti{
+position:fixed;
+width:10px;
+height:10px;
+top:-10px;
+animation:fall 4s linear infinite;
+}
+
+@keyframes fall{
+to{transform:translateY(100vh) rotate(360deg);}
+}
+
+.hidden{
+display:none;
+}
+
+#final{
+font-size:22px;
+color:#d84315;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+ 
+<audio id="introMusic" autoplay loop>
+<source src="D:\Work\Birthday\song.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="music" loop>
+<source src="D:\Work\Birthday\Yen Endral Un Pirantha Naal.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+<!-- First Message Screen -->
+
+<div id="intro">
+
+<h1> Happy Birthday Sister💛 </h1>
+</div>
+<button id="button1" onclick="startmsg()">Click To Open the Message 🎁</button>
+<div id="fmsg" class="hidden">
+<p class="message">
+
+Not all sisters are born in the same family, but some people enter our lives and become family by heart. 
+You may not be my blood sister, but the bond we share is just as special. 
+Your kindness, support, and the way you always understand me mean a lot to me. 
+Some relationships are not defined by blood, but by love, trust, and care. 
+I’m really grateful to have you in my life, and our bond will always remain special to me.
+</p>
+</div>
+<button id="button2" class="hidden" onclick="startSurprise()">Surprise Here🎁</button>
+
+
+<!-- Surprise Section -->
+
+<div id="surprise" class="hidden">
+
+<h2>Happy Birthday Sister💛</h2>
+
+<div class="slideshow">
+
+<div class="slide fade">
+<img src="D:\Work\Birthday\photo1.jpeg">
+</div>
+
+<div class="slide fade">
+<img src="D:\Work\Birthday\photo2.jpeg">
+</div>
+
+<div class="slide fade">
+<img src="D:\Work\Birthday\photo3.jpeg">
+</div>
+
+<div class="slide fade">
+<img src="D:\Work\Birthday\photo4.jpeg">
+</div>
+
+<div class="slide fade">
+<img src="D:\Work\Birthday\photo5.jpeg">
+</div>
+
+<div class="slide fade">
+<img src="D:\Work\Birthday\birthday.jpeg">
+</div>
+
+</div>
+
+<div id="final">
+
+<p class="message">
+On your special day, I just want to remind you how strong, talented, and capable you are. 
+Life has so many beautiful opportunities waiting for you, and I truly believe you will achieve great things in the future. 
+Keep believing in yourself, follow your dreams, and never stop chasing what makes you happy. 
+May this year bring you success, happiness, and endless possibilities in your life.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* Slideshow */
+
+let slideIndex=0;
+
+function showSlides(){
+
+let slides=document.getElementsByClassName("slide");
+
+for(let i=0;i<slides.length;i++){
+slides[i].style.display="none";
+}
+
+slideIndex++;
+
+if(slideIndex>slides.length){
+slideIndex=1;
+}
+
+slides[slideIndex-1].style.display="block";
+
+setTimeout(showSlides,2500);
+}
+
+/* Start surprise */
+function startmsg(){
+document.getElementById("fmsg").style.display="block";
+document.getElementById("introMusic").play();
+document.getElementById("button1").style.display="none";
+document.getElementById("button2").style.display="block";
+
+
+for(let i=0;i<80;i++){
+
+let confetti=document.createElement("div");
+
+confetti.className="confetti";
+
+confetti.style.left=Math.random()*100+"vw";
+
+let colors=["red","yellow","orange","pink","purple"];
+
+confetti.style.background=colors[Math.floor(Math.random()*colors.length)];
+
+confetti.style.animationDuration=(3+Math.random()*2)+"s";
+
+document.body.appendChild(confetti);
+
+}
+
+/* Balloons */
+
+for(let i=0;i<15;i++){
+
+let balloon=document.createElement("div");
+
+balloon.className="balloon";
+
+balloon.style.left=Math.random()*100+"vw";
+
+let colors=["red","yellow","orange","pink","purple"];
+
+balloon.style.background=colors[Math.floor(Math.random()*colors.length)];
+
+balloon.style.animationDuration=(6+Math.random()*4)+"s";
+
+document.body.appendChild(balloon);
+
+}
+
+
+
+}
+function startSurprise(){
+
+document.getElementById("intro").style.display="none";
+document.getElementById("fmsg").style.display="none";
+document.getElementById("surprise").style.display="block";
+document.getElementById("introMusic").pause();
+document.getElementById("music").play();
+document.getElementById("button2").style.display="none";
+
+
+showSlides();
+
+/* Confetti */
+
+for(let i=0;i<80;i++){
+
+let confetti=document.createElement("div");
+
+confetti.className="confetti";
+
+confetti.style.left=Math.random()*100+"vw";
+
+let colors=["red","yellow","orange","pink","purple"];
+
+confetti.style.background=colors[Math.floor(Math.random()*colors.length)];
+
+confetti.style.animationDuration=(3+Math.random()*2)+"s";
+
+document.body.appendChild(confetti);
+
+}
+
+/* Balloons */
+
+for(let i=0;i<15;i++){
+
+let balloon=document.createElement("div");
+
+balloon.className="balloon";
+
+balloon.style.left=Math.random()*100+"vw";
+
+let colors=["red","yellow","orange","pink","purple"];
+
+balloon.style.background=colors[Math.floor(Math.random()*colors.length)];
+
+balloon.style.animationDuration=(6+Math.random()*4)+"s";
+
+document.body.appendChild(balloon);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
