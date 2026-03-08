@@ -17,10 +17,14 @@ margin:0;
 font-family:Arial;
 text-align:center;
 color:#5d4037;
-
-background:linear-gradient(270deg,#fff9c4,#fff176,#ffd54f,#ffca28);
-background-size:800% 800%;
-animation:gradientMove 10s ease infinite;
+}
+.birthday-bg{
+background-image:url("background.jpg");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+height:100vh;
+animation:zoom 10s infinite alternate;
 }
 
 @keyframes gradientMove{
@@ -34,7 +38,24 @@ max-width:400px;
 margin:auto;
 padding:25px;
 }
+.photo-frame{
+width:220px;
+border:6px solid #ff4081;
+border-radius:20px;
+padding:5px;
+box-shadow:0 0 20px #ff4081;
+animation:glow 2s infinite alternate;
+}
 
+.photo-frame img{
+width:100%;
+border-radius:15px;
+}
+
+@keyframes glow{
+from{box-shadow:0 0 10px #ff4081;}
+to{box-shadow:0 0 30px #ff4081;}
+}
 /* Heading */
 
 h1{
@@ -49,7 +70,12 @@ font-size:18px;
 margin-top:20px;
 line-height:1.6;
 }
-
+.message1{
+    font-size:18px;
+margin-top:20px;
+line-height:1.6;
+color:#5d4037;
+}
 /* Button */
 
 button{
@@ -62,6 +88,7 @@ font-size:16px;
 margin-top:25px;
 cursor:pointer;
 }
+
 
 /* Slideshow */
 
@@ -86,7 +113,7 @@ width:100%;
 /* Fade */
 
 .fade{
-animation:fade 1.5s;
+animation:fade 2s;
 }
 
 @keyframes fade{
@@ -195,7 +222,7 @@ margin-top:20px;
 
 <h1> Happy Birthday Sister💛 </h1>
 </div>
-<button id="button1" onclick="startmsg()">Click To Open the Message 🎁</button>
+<button id="button1" onclick="startmsg()">Click Here To Celebrate🎁</button>
 <div id="fmsg" class="hidden">
 <p class="message">
 
@@ -206,8 +233,8 @@ Some relationships are not defined by blood, but by love, trust, and care.
 I’m really grateful to have you in my life, and our bond will always remain special to me.
 </p>
 </div>
-<button id="button2" class="hidden" onclick="startSurprise()">Surprise Here🎁</button>
-
+<button id="button3" class="hidden" onclick="showBackground()">Decorate Background 🎨</button>
+<button id="button4" class="hidden" onclick="showphotos()">Add Photos 🎨</button>
 
 <!-- Surprise Section -->
 
@@ -216,7 +243,7 @@ I’m really grateful to have you in my life, and our bond will always remain sp
 <h2>Happy Birthday Sister💛</h2>
 
 <div class="slideshow">
-
+<div class="photo-frame">
 <div class="slide fade">
 <img src="photo1.jpeg">
 </div>
@@ -240,12 +267,16 @@ I’m really grateful to have you in my life, and our bond will always remain sp
 <div class="slide fade">
 <img src="birthday.jpeg">
 </div>
+</div>
+</div>
+
+<button id="button2" class="hidden" onclick="startSurprise()">And it is for You💛</button>
 
 </div>
 
-<div id="final">
 
-<p class="message">
+<div id="final" class="hidden">
+<p class="message1">
 On your special day, I just want to remind you how strong, talented, and capable you are. 
 Life has so many beautiful opportunities waiting for you, and I truly believe you will achieve great things in the future. 
 Keep believing in yourself, follow your dreams, and never stop chasing what makes you happy. 
@@ -253,11 +284,7 @@ May this year bring you success, happiness, and endless possibilities in your li
 </p>
 
 </div>
-
 </div>
-
-</div>
-
 <script>
 
 /* Slideshow */
@@ -282,56 +309,30 @@ slides[slideIndex-1].style.display="block";
 
 setTimeout(showSlides,2500);
 }
+function showBackground(){
 
+document.body.classList.add("birthday-bg");
+document.getElementById("button3").style.display="none";
+document.getElementById("button4").style.display="block";
+
+}
+function showphotos(){
+    document.getElementById("intro").style.display="none";
+    document.getElementById("fmsg").style.display="none";
+    document.getElementById("button4").style.display="none";
+    document.getElementById("surprise").style.display="block";
+    document.getElementById("button2").style.display="block";
+    showSlides();
+}
 /* Start surprise */
 function startmsg(){
 document.getElementById("fmsg").style.display="block";
 document.getElementById("introMusic").play();
 document.getElementById("button1").style.display="none";
-document.getElementById("button2").style.display="block";
-
-
-for(let i=0;i<80;i++){
-
-let confetti=document.createElement("div");
-
-confetti.className="confetti";
-
-confetti.style.left=Math.random()*100+"vw";
-
-let colors=["red","yellow","orange","pink","purple"];
-
-confetti.style.background=colors[Math.floor(Math.random()*colors.length)];
-
-confetti.style.animationDuration=(3+Math.random()*2)+"s";
-
-document.body.appendChild(confetti);
+document.getElementById("button3").style.display="block";
 
 }
 
-/* Balloons */
-
-for(let i=0;i<15;i++){
-
-let balloon=document.createElement("div");
-
-balloon.className="balloon";
-
-balloon.style.left=Math.random()*100+"vw";
-
-let colors=["red","yellow","orange","pink","purple"];
-
-balloon.style.background=colors[Math.floor(Math.random()*colors.length)];
-
-balloon.style.animationDuration=(6+Math.random()*4)+"s";
-
-document.body.appendChild(balloon);
-
-}
-
-
-
-}
 function startSurprise(){
 
 document.getElementById("intro").style.display="none";
@@ -340,6 +341,7 @@ document.getElementById("surprise").style.display="block";
 document.getElementById("introMusic").pause();
 document.getElementById("music").play();
 document.getElementById("button2").style.display="none";
+document.getElementById("final").style.display="block";
 
 
 showSlides();
@@ -383,11 +385,46 @@ balloon.style.animationDuration=(6+Math.random()*4)+"s";
 document.body.appendChild(balloon);
 
 }
+for(let i=0;i<80;i++){
+
+let confetti=document.createElement("div");
+
+confetti.className="confetti";
+
+confetti.style.left=Math.random()*100+"vw";
+
+let colors=["red","yellow","orange","pink","purple"];
+
+confetti.style.background=colors[Math.floor(Math.random()*colors.length)];
+
+confetti.style.animationDuration=(3+Math.random()*2)+"s";
+
+document.body.appendChild(confetti);
+
+}
+
+
+for(let i=0;i<15;i++){
+
+let balloon=document.createElement("div");
+
+balloon.className="balloon";
+
+balloon.style.left=Math.random()*100+"vw";
+
+let colors=["red","yellow","orange","pink","purple"];
+
+balloon.style.background=colors[Math.floor(Math.random()*colors.length)];
+
+balloon.style.animationDuration=(6+Math.random()*4)+"s";
+
+document.body.appendChild(balloon);
+
+}
 
 }
 
 </script>
 
 </body>
-
 </html>
